@@ -1,12 +1,18 @@
 <script lang="ts">
-    import { weatherData } from "./lib/api"
+    import { meteoData } from "./lib/api"
 
-    // Current weather data
-    console.log(weatherData.current)
-    // Hourly weather data
-    console.log(weatherData.hourly)
-    // Daily weather data
-    console.log(weatherData.daily)
+
+
+    
+  let city = $state('');
+
+  function handleSearch() {
+    if (city.trim()) {
+      meteoData(city);
+    } else {
+      alert('Please enter a city name');
+    }
+  }
     
 </script>
 <header>
@@ -19,6 +25,11 @@
 </header>
 
 <main>
+    <div class="search-bar">
+        <label for="seach-bar"></label>
+        <input type="text" id="seach-bar" placeholder="Search for a place..." bind:value={city}>
+        <button onclick={handleSearch}>Search</button>
+    </div>
     <h1>How's the sky looking today?</h1>
 </main>
 

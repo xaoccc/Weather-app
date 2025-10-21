@@ -7,6 +7,19 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Reset */
+img {
+  display: block;
+}
+
+p, input, button {
+  outline: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  color: inherit;
+}
+
 body {
   margin: 0;
   display: flex;
@@ -22,14 +35,7 @@ h1 {
   text-align: center;
 }
 
-img {
-  display: block;
-}
 
-p {
-  padding: 0;
-  margin: 0;
-}
 
 header, main {
   min-width: 76rem;
@@ -53,16 +59,37 @@ main {
   gap: 0.5rem;
   background-color: hsl(243, 27%, 20%);
   padding: 0.5rem 0.75rem;
-  border-radius: 0.5rem;
+  border-radius: 0.75rem;
 }
 
 .dropdown-btn {
   background: url('icon-dropdown.svg') no-repeat center;
-  outline: none;
-  border: none;
-  padding: 0;
-  margin: 0;
   width: 13px;
   height: 8px;
+}
+
+/* Search bar */
+.search-bar {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  width: 50%;
+  margin: 0 auto;
+}
+
+.search-bar > input {
+  background:  url('icon-search.svg') no-repeat 1rem, center, hsl(243, 27%, 20%);
+  border-radius: 0.75rem;
+  padding: 1rem 1rem 1rem 3rem;
+  width: 100%;
+  font-size: 1.2rem;
+}
+
+.search-bar > button {
+  padding: 1rem;
+  background-color: hsl(233, 67%, 56%);
+  border-radius: 0.75rem;
+  font-size: 1.2rem;
+  text-align: center;
 }
 
