@@ -6,21 +6,16 @@ export async function meteoData(city) {
 
     const geoResponse = await fetch(geocodeUrl);
     const geoData = await geoResponse.json();
+    const location = geoData.results?.[0] || {};
+    const name = location.name || 'Unknown';
+    const country = location.country || 'Unknown';
 
-    if (!navigator.geolocation) {
-        console.error('Geolocation not supported');
-    }
-
-    // Get current position
-    navigator.geolocation.getCurrentPosition(async (position) => {
-        const { latitude, longitude } = position.coords;
-    })
 
     // Get position data from input
     const params = {
         latitude: geoData.results[0].latitude,
         longitude: geoData.results[0].longitude,
-        current: 'temperature_2m,weather_code,wind_speed_10m,wind_direction_10m',
+        current: 'temperature_2m,weather_code,wind_speed_10m,wind_direction_10m,apparent_temperature',
         hourly: 'temperature_2m,precipitation',
         daily: 'weather_code,temperature_2m_max,temperature_2m_min'
     };
@@ -47,12 +42,15 @@ export async function meteoData(city) {
 
     // Note: The order of weather variables in the URL query and the indices below need to match!
     const weatherData = {
+        name,
+        country, 
         current: {
             time: new Date((Number(current.time()) + utcOffsetSeconds) * 1000),
             temperature: current.variables(0)!.value(), // Current is only 1 value, therefore `.value()`
             weatherCode: current.variables(1)!.value(),
             windSpeed: current.variables(2)!.value(),
-            windDirection: current.variables(3)!.value()
+            windDirection: current.variables(3)!.value(),
+            feelsLike: current.variables(4)!.value(),
         },
         hourly: {
             time: range(Number(hourly.time()), Number(hourly.timeEnd()), hourly.interval()).map(
@@ -71,15 +69,7 @@ export async function meteoData(city) {
         }
     };
 
-    // Current weather data
-    console.log(weatherData.current)
-    // Hourly weather data
-    console.log(weatherData.hourly)
-    // Daily weather data
-    console.log(weatherData.daily)
-
-
-
+    return weatherData;
 }
 
 

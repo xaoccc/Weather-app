@@ -73,7 +73,7 @@ main {
   display: flex;
   flex-direction: row;
   gap: 1rem;
-  width: 50%;
+  width: 55%;
   margin: 0 auto;
 }
 
@@ -86,10 +86,69 @@ main {
 }
 
 .search-bar > button {
-  padding: 1rem;
+  padding: 1rem 1.5rem;
   background-color: hsl(233, 67%, 56%);
   border-radius: 0.75rem;
   font-size: 1.2rem;
   text-align: center;
+}
+
+/* Weather data containers */
+.container {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  margin-top: 3rem;
+}
+
+.left-container {
+  display: flex;
+  flex-direction: column;
+  width: 66%;
+  position: relative;
+  left: 1rem;
+}
+
+.current {
+  display: flex;
+  flex-direction: column;
+}
+
+.current-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 1rem;
+  padding: 5.25rem 1.5rem;
+  background: url('bg-today-large.svg') no-repeat center;
+}
+
+.temperature {
+  font-size: 6rem;
+  font-style: italic;
+}
+
+.current-more-info {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between ;
+  gap: 1.5rem;
+  margin: 1.75rem 0 3rem;
+}
+
+.current-more-info > div {
+  background-color: hsl(243, 27%, 20%);
+  border-radius: 1rem;
+  border: 1px solid hsl(243, 23%, 30%);
+  width: 100%;
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.current-more-info > div > p:nth-child(2) {
+  font-size: 2rem;
+  margin-top: 1.5rem;
 }
 
