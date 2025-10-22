@@ -4,7 +4,9 @@
     let city = $state("");
     let weather = $state(null);
     let error = $state(null);
-    let units = $state("metric");
+    let units = $state(["c", "kmh", "mm"]);
+    let dropdownUnitsShow = $state(false);
+    let dropdownWeekdayShow = $state(false);
 
     async function handleSearch() {
         if (city.trim()) {
@@ -24,7 +26,7 @@
 
     function showTemperature(weather, units, type) {
         if (weather) {
-            if (units == "metric") {
+            if (units[0] == "c") {
                 if (type == "feelsLike") {
                     return weather.current.feelsLike.toFixed(0);
                 }
@@ -36,7 +38,7 @@
             return toFarenheit(weather.current.temperature).toFixed(0);
         }
 
-        if (units == "metric") {
+        if (units[0] == "c") {
             if (type == "feelsLike") {
                 return 18;
             }
@@ -50,18 +52,96 @@
 
     function showWind(weather, units) {
         if (weather) {
-            return (units == "metric") ? weather.current.windSpeed.toFixed(0) : (weather.current.windSpeed * 0.621371).toFixed(0);
+            return units[1] == "kmh"
+                ? weather.current.windSpeed.toFixed(0)
+                : (weather.current.windSpeed * 0.621371).toFixed(0);
         }
-        return (units == "metric") ? 14 : 9;
+        return units[1] == "kmh" ? 14 : 9;
+    }
+
+    function showPrecipitation(weather, units) {
+        if (weather) {
+            return units[2] == "mm"
+                ? weather.current.precipitation.toFixed(2)
+                : (weather.current.precipitation / 25.4).toFixed(2);
+        }
+        return units[2] == "mm" ? 0 : 0;
+    }
+
+    function weatherCond(code) {
+        switch (true) {
+            case [0].includes(code):
+                return "icon-sunny.webp";
+            case [1, 2, 3].includes(code):
+                return "icon-partly-cloudy.webp";
+            case [10, 11, 12].includes(code):
+                return "icon-fog.webp";
+            case [21, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69].includes(code):
+                return "icon-rain.webp";
+            case [50, 51, 52, 53, 54, 55, 56, 57, 58, 59].includes(code):
+                return "icon-drizzle.webp";
+            case [22].includes(code):
+                return "icon-snow.webp";
+            default:
+                return "icon-sunny.webp";
+        }
     }
 </script>
 
 <header>
     <img src="logo.svg" alt="logo" />
-    <div class="units-btn">
-        <img src="icon-units.svg" alt="settings icon" />
-        <p>Units</p>
-        <button aria-label="dropdown button" class="dropdown-btn"></button>
+    <div class="units">
+        <button
+            class="units-btn"
+            onclick={() => {
+                dropdownUnitsShow
+                    ? (dropdownUnitsShow = false)
+                    : (dropdownUnitsShow = true);
+            }}
+        >
+            <img src="icon-units.svg" alt="settings icon" />
+            <p>Units</p>
+            <div class="dropdown-btn"></div>
+        </button>
+        {#if dropdownUnitsShow}
+            <div class="dropdown-units">
+                <div>Switch to imperial</div>
+                <hr />
+                <div class="unit-title">Temperature</div>
+                <button
+                    onclick={() => (units[0] = "c")}
+                    class={units[0] == "c" ? "selected" : ""}
+                    >Celsius (ºC)</button
+                >
+                <button
+                    onclick={() => (units[0] = "f")}
+                    class={units[0] == "f" ? "selected" : ""}
+                    >Fahrenheit (ºF)</button
+                >
+                <hr />
+                <div class="unit-title">Wind speed</div>
+                <button
+                    onclick={() => (units[1] = "kmh")}
+                    class={units[1] == "kmh" ? "selected" : ""}>km/h</button
+                >
+                <button
+                    onclick={() => (units[1] = "mph")}
+                    class={units[1] == "mph" ? "selected" : ""}>mph</button
+                >
+                <hr />
+                <div class="unit-title">Precipitation</div>
+                <button
+                    onclick={() => (units[2] = "mm")}
+                    class={units[2] == "mm" ? "selected" : ""}
+                    >Milimeters (mm)</button
+                >
+                <button
+                    onclick={() => (units[2] = "in")}
+                    class={units[2] == "in" ? "selected" : ""}
+                    >Inches (in)</button
+                >
+            </div>
+        {/if}
     </div>
 </header>
 
@@ -97,7 +177,13 @@
                         </p>
                     </div>
                     <div class="temperature">
-                        {`${showTemperature(weather, units, "normal")}º`}
+                        <img
+                            src={weather
+                                ? weatherCond(weather.current.weatherCode)
+                                : "icon-sunny.webp"}
+                            alt="icon-weather"
+                        />
+                        <p>{`${showTemperature(weather, units, "normal")}º`}</p>
                     </div>
                 </div>
                 <div class="current-more-info">
@@ -109,19 +195,49 @@
                     </div>
                     <div>
                         <p>Humidity</p>
-                        <p></p>
+                        <p>{`${weather ? weather.current.humidity : 46}%`}</p>
                     </div>
                     <div>
                         <p>Wind</p>
-                        <p>{`${showWind(weather, units)} ${(units == "metric") ? " km/h" : " mph"}`}</p>
+                        <p>
+                            {`${showWind(weather, units)} ${units[1] == "kmh" ? " km/h" : " mph"}`}
+                        </p>
                     </div>
                     <div>
                         <p>Precipitation</p>
-                        <p></p>
+                        <p>
+                            {`${showPrecipitation(weather, units)} ${units[2] == "mm" ? " mm" : " in"}`}
+                        </p>
                     </div>
                 </div>
             </div>
         </section>
-        <section class="hourly"></section>
+        <section class="hourly">
+            <div class="hourly-header">
+                <p>Hourly forecast</p>
+                <div class="weekday-btn">
+                    <div>
+                        <button
+                        class="weekday-select-btn"
+                            onclick={() =>
+                                (dropdownWeekdayShow = !dropdownWeekdayShow)}
+                        >Tuesday</button>
+                        <img src="icon-dropdown.svg" alt="" />
+                    </div>
+
+                    {#if dropdownWeekdayShow}
+                        <div class="dropdown-weekday">
+                            <button>Monday</button>
+                            <button>Tuesday</button>
+                            <button>Wednesday</button>
+                            <button>Thursday</button>
+                            <button>Friday</button>
+                            <button>Saturday</button>
+                            <button>Sunday</button>
+                        </div>
+                    {/if}
+                </div>
+            </div>
+        </section>
     </section>
 </main>

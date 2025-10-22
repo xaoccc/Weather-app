@@ -52,6 +52,12 @@ main {
   flex-direction: column;
 }
 
+.units {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
 .units-btn {
   display: flex;
   flex-direction: row;
@@ -60,6 +66,75 @@ main {
   background-color: hsl(243, 27%, 20%);
   padding: 0.5rem 0.75rem;
   border-radius: 0.75rem;
+}
+
+.dropdown-units {
+  position: fixed;
+  top: 5.5rem;
+  display: flex;
+  flex-direction: column;
+  background-color: hsl(243, 27%, 20%);
+  padding: 0.5rem;
+  border-radius: 0.5rem;  
+}
+
+.weekday-btn {
+  position: relative;
+  padding: 1rem 1.5rem;
+  background: hsl(243, 23%, 24%);
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  border-radius: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.weekday-select-btn {
+  background: hsl(243, 23%, 24%) ;
+  gap: 1rem;
+}
+
+.weekday-btn > div{
+  display: flex;
+}
+
+.weekday-btn > div:first-child{
+  gap: 1rem;
+}
+
+.dropdown-weekday {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 4rem;
+  right: 0;
+  background-color: hsl(243, 27%, 20%);
+  padding: 1rem;
+  border-radius: 0.5rem;
+  border: 1px solid hsl(243, 23%, 30%);
+  width: 10rem;
+}
+
+.dropdown-units hr {
+  background-color: hsl(243, 23%, 24%);
+  border: none;
+  width: 100%;
+  height: 1px;
+}
+
+.dropdown-units button, .dropdown-weekday > button {
+  background-color: inherit;
+  text-align: left;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+}
+
+.unit-title {
+  color: hsl(240, 6%, 70%);
+}
+
+.selected {
+  background: hsl(243, 23%, 24%) url('icon-checkmark.svg') no-repeat right 0.5rem center !important;
 }
 
 .dropdown-btn {
@@ -97,7 +172,7 @@ main {
 .container {
   display: flex;
   flex-direction: row;
-  gap: 1rem;
+  gap: 3rem;
   margin-top: 3rem;
 }
 
@@ -114,19 +189,39 @@ main {
   flex-direction: column;
 }
 
-.current-header {
+.current-header, .hourly-header {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
   border-radius: 1rem;
+} 
+
+.current-header {
   padding: 5.25rem 1.5rem;
   background: url('bg-today-large.svg') no-repeat center;
+}
+
+.hourly {
+  width: 30%;
+}
+
+.hourly-header {
+  background-color: hsl(243, 27%, 20%);
+  padding: 1rem;
 }
 
 .temperature {
   font-size: 6rem;
   font-style: italic;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 2rem;
+}
+.temperature img {
+  width: 25%;
 }
 
 .current-more-info {
@@ -150,5 +245,9 @@ main {
 .current-more-info > div > p:nth-child(2) {
   font-size: 2rem;
   margin-top: 1.5rem;
+}
+
+button:hover {
+  cursor: pointer;
 }
 
