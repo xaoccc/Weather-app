@@ -9,19 +9,35 @@
     let dropdownUnitsShow = $state(false);
     let weekdayShow = $state("1");
     let hourlyData = $state([]);
+    let dailyData = $state([]);
 
     function logDay() {
         // For each filter we emply the array, so we don't add to existing data
-        hourlyData = []
+        hourlyData = [];
 
         weather.hourly.time.forEach((value, i) => {
             if (value.getDay() == weekdayShow) {
-                hourlyData.push(
-                    [value.getHours(), weather.hourly.temperature[i], weather.hourly.weatherCode[i]]
-                )               
+                hourlyData.push([
+                    value.getHours(),
+                    weather.hourly.temperature[i],
+                    weather.hourly.weatherCode[i],
+                ]);
             }
-        })
-        
+        });
+    }
+
+    function logWeek() {
+        // For each filter we emply the array, so we don't add to existing data
+        dailyData = [];
+
+        weather.daily.time.forEach((value, i) => {
+            dailyData.push([
+                value.toLocaleDateString("en-US", { weekday: "short" }),
+                weather.daily.weatherCode[i],
+                weather.daily.temperatureMax[i],
+                weather.daily.temperatureMin[i],
+            ]);
+        });
     }
 
     async function handleSearch() {
@@ -29,6 +45,7 @@
             try {
                 weather = await meteoData(city);
                 logDay();
+                logWeek();
             } catch (err) {
                 error = err.message;
             }
@@ -222,6 +239,24 @@
                     </div>
                 </div>
             </div>
+            <div class="daily">
+                {#if dailyData}
+                    {#each dailyData as data}
+                        <div>
+                            <p>{data[0]}</p>
+                            <img
+                                src={weatherCond(data[1])}
+                                class="weather-icon"
+                                alt="weather-icon"
+                            />
+                            <div class="daily-temp">
+                                <p>{data[2].toFixed(0)}º</p>
+                                <p>{data[3].toFixed(0)}º</p>
+                            </div>
+                        </div>
+                    {/each}
+                {/if}
+            </div>
         </section>
         <section class="hourly">
             <div class="hourly-header">
@@ -247,18 +282,24 @@
                 </select>
             </div>
             <div class="hourly-data">
-                {#if (hourlyData.length > 0) }
+                {#if hourlyData.length > 0}
                     {#each hourlyData as data}
                         <div>
                             <div>
-                                <img src={weatherCond(data[2])} class="weather-icon" alt="weather-icon" />
-                                <div>{(data[0] > 12) ? data[0] - 12 : data[0]} {(data[0] > 12) ? "PM" : "AM"}</div>
+                                <img
+                                    src={weatherCond(data[2])}
+                                    class="weather-icon"
+                                    alt="weather-icon"
+                                />
+                                <div>
+                                    {data[0] > 12 ? data[0] - 12 : data[0]}
+                                    {data[0] > 12 ? "PM" : "AM"}
+                                </div>
                             </div>
                             <div>{data[1].toFixed(0)}º</div>
                         </div>
                     {/each}
                 {/if}
-
             </div>
         </section>
     </section>

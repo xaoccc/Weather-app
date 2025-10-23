@@ -1,287 +1,323 @@
 :root {
-  color: rgba(255, 255, 255, 0.87);
-  background-color: hsl(243, 96%, 9%);
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+    color: rgba(255, 255, 255, 0.87);
+    background-color: hsl(243, 96%, 9%);
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 /* Reset */
 img {
-  display: block;
+    display: block;
 }
 
 p,
 input,
 button {
-  outline: none;
-  border: none;
-  padding: 0;
-  margin: 0;
-  color: inherit;
+    outline: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+    color: inherit;
 }
 
 body {
-  margin: 0;
-  display: flex;
-  justify-content: center;
-  font-family: 'DM Sans', sans-serif;
-  min-height: 100vh;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    font-family: 'DM Sans', sans-serif;
+    min-height: 100vh;
 }
 
 h1 {
-  font-family: 'Bricolage Grotesque';
-  font-size: 3.2em;
-  line-height: 1.1;
-  text-align: center;
+    font-family: 'Bricolage Grotesque';
+    font-size: 3.2em;
+    line-height: 1.1;
+    text-align: center;
 }
 
 
 
 header,
 main {
-  min-width: 76rem;
-  margin: 3rem auto;
-  display: flex;
+    min-width: 76rem;
+    margin: 3rem auto;
+    display: flex;
 }
 
 header {
-  flex-direction: row;
-  justify-content: space-between;
+    flex-direction: row;
+    justify-content: space-between;
 }
 
 main {
-  flex-direction: column;
+    flex-direction: column;
 }
 
 .units {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
 }
 
 .units-btn {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 0.5rem;
-  background-color: hsl(243, 27%, 20%);
-  padding: 0.5rem 0.75rem;
-  border-radius: 0.75rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5rem;
+    background-color: hsl(243, 27%, 20%);
+    padding: 0.5rem 0.75rem;
+    border-radius: 0.75rem;
 }
 
 .dropdown-units {
-  position: fixed;
-  top: 5.5rem;
-  display: flex;
-  flex-direction: column;
-  background-color: hsl(243, 27%, 20%);
-  padding: 0.5rem;
-  border-radius: 0.5rem;
+    position: fixed;
+    top: 5.5rem;
+    display: flex;
+    flex-direction: column;
+    background-color: hsl(243, 27%, 20%);
+    padding: 0.5rem;
+    border-radius: 0.5rem;
 }
 
 .weekday-btn {
-  position: relative;
-  padding: 1rem 1.5rem;
-  background: hsl(243, 23%, 24%);
-  display: flex;
-  flex-direction: row;
-  gap: 1rem;
-  border-radius: 0.5rem;
-  margin-bottom: 1rem;
+    position: relative;
+    padding: 1rem 1.5rem;
+    background: hsl(243, 23%, 24%);
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    border-radius: 0.5rem;
+    margin-bottom: 1rem;
 }
 
 .weekday-select-btn {
-  background: hsl(243, 23%, 24%);
-  gap: 1rem;
+    background: hsl(243, 23%, 24%);
+    gap: 1rem;
 }
 
 .weekday-btn>div {
-  display: flex;
+    display: flex;
 }
 
 .weekday-btn>div:first-child {
-  gap: 1rem;
+    gap: 1rem;
 }
 
 .dropdown-weekday {
-  display: flex;
-  flex-direction: column;
-  background-color: hsl(243, 27%, 20%);
-  padding: 1rem;
-  border-radius: 0.5rem;
-  border: 1px solid hsl(243, 23%, 30%);
-  width: 10rem;
-  color: inherit;
+    display: flex;
+    flex-direction: column;
+    background-color: hsl(243, 27%, 20%);
+    padding: 1rem;
+    border-radius: 0.5rem;
+    border: 1px solid hsl(243, 23%, 30%);
+    width: 10rem;
+    color: inherit;
 }
 
 .dropdown-units hr {
-  background-color: hsl(243, 23%, 24%);
-  border: none;
-  width: 100%;
-  height: 1px;
+    background-color: hsl(243, 23%, 24%);
+    border: none;
+    width: 100%;
+    height: 1px;
 }
 
 .dropdown-units button {
-  background-color: inherit;
-  text-align: left;
-  padding: 0.5rem;
-  border-radius: 0.5rem;
+    background-color: inherit;
+    text-align: left;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
 }
 
 .unit-title {
-  color: hsl(240, 6%, 70%);
+    color: hsl(240, 6%, 70%);
 }
 
 .selected {
-  background: hsl(243, 23%, 24%) url('icon-checkmark.svg') no-repeat right 0.5rem center !important;
+    background: hsl(243, 23%, 24%) url('icon-checkmark.svg') no-repeat right 0.5rem center !important;
 }
 
 .dropdown-btn {
-  background: url('icon-dropdown.svg') no-repeat center;
-  width: 13px;
-  height: 8px;
+    background: url('icon-dropdown.svg') no-repeat center;
+    width: 13px;
+    height: 8px;
 }
 
 /* Search bar */
 .search-bar {
-  display: flex;
-  flex-direction: row;
-  gap: 1rem;
-  width: 55%;
-  margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    width: 55%;
+    margin: 0 auto;
 }
 
 .search-bar>input {
-  background: url('icon-search.svg') no-repeat 1rem, center, hsl(243, 27%, 20%);
-  border-radius: 0.75rem;
-  padding: 1rem 1rem 1rem 3rem;
-  width: 100%;
-  font-size: 1.2rem;
+    background: url('icon-search.svg') no-repeat 1rem, center, hsl(243, 27%, 20%);
+    border-radius: 0.75rem;
+    padding: 1rem 1rem 1rem 3rem;
+    width: 100%;
+    font-size: 1.2rem;
 }
 
 .search-bar>button {
-  padding: 1rem 1.5rem;
-  background-color: hsl(233, 67%, 56%);
-  border-radius: 0.75rem;
-  font-size: 1.2rem;
-  text-align: center;
+    padding: 1rem 1.5rem;
+    background-color: hsl(233, 67%, 56%);
+    border-radius: 0.75rem;
+    font-size: 1.2rem;
+    text-align: center;
 }
 
 /* Weather data containers */
 .container {
-  display: flex;
-  flex-direction: row;
-  gap: 3rem;
-  margin-top: 3rem;
+    display: flex;
+    flex-direction: row;
+    gap: 3rem;
+    margin-top: 3rem;
 }
 
 .left-container {
-  display: flex;
-  flex-direction: column;
-  width: 66%;
-  position: relative;
-  left: 1rem;
+    display: flex;
+    flex-direction: column;
+    width: 66%;
+    position: relative;
+    left: 1rem;
 }
 
 .current {
-  display: flex;
-  flex-direction: column;
+    display: flex;
+    flex-direction: column;
 }
 
 .current-header,
 .hourly-header {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  border-radius: 1rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 1rem;
 }
 
 .current-header {
-  padding: 5.25rem 1.5rem;
-  background: url('bg-today-large.svg') no-repeat center;
+    padding: 5.25rem 1.5rem;
+    background: url('bg-today-large.svg') no-repeat center;
 }
 
 
 
 .temperature {
-  font-size: 6rem;
-  font-style: italic;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: flex-end;
-  gap: 2rem;
+    font-size: 6rem;
+    font-style: italic;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 2rem;
 }
 
 .temperature img {
-  width: 25%;
+    width: 25%;
 }
 
 .current-more-info {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  gap: 1.5rem;
-  margin: 1.75rem 0 3rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 1.5rem;
+    margin: 1.75rem 0 3rem;
 }
 
 .current-more-info>div {
-  background-color: hsl(243, 27%, 20%);
-  border-radius: 1rem;
-  border: 1px solid hsl(243, 23%, 30%);
-  width: 100%;
-  padding: 1.25rem;
-  display: flex;
-  flex-direction: column;
+    background-color: hsl(243, 27%, 20%);
+    border-radius: 1rem;
+    border: 1px solid hsl(243, 23%, 30%);
+    width: 100%;
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
 }
 
 .current-more-info>div>p:nth-child(2) {
-  font-size: 2rem;
-  margin-top: 1.5rem;
+    font-size: 2rem;
+    margin-top: 1.5rem;
 }
 
 /* Hourly data */
 .hourly {
-  width: 30%;
-  background-color: hsl(243, 27%, 20%);
-  border-radius: 1rem;
+    width: 30%;
+    background-color: hsl(243, 27%, 20%);
+    border-radius: 1rem;
 }
 
 .hourly-header {
-  padding: 1rem;
+    padding: 1rem;
 }
 
 .hourly-data,
 .hourly-data div {
-  display: flex;
+    display: flex;
 }
 
 .hourly-data {
-  flex-direction: column;
-  padding: 1.5rem;
-  gap: 1rem;
+    flex-direction: column;
+    padding: 1.5rem;
+    gap: 1rem;
+    height: 30rem;
+    overflow-y: scroll;
+}
+
+.hourly-data::-webkit-scrollbar {
+    background: none;
+    width: 0.25rem;
+}
+.hourly-data::-webkit-scrollbar-thumb {
+    background: hsl(243, 23%, 30%);
 }
 
 .hourly-data div {
-  flex-direction: row;
-  align-items: center;
-  gap: 1rem;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
 }
 
 .hourly-data>div {
-  justify-content: space-between;
-  border-radius: 0.5rem;
-  border: 1px solid hsl(243, 23%, 30%);
-  padding: 0 1rem;
+    justify-content: space-between;
+    border-radius: 0.5rem;
+    border: 1px solid hsl(243, 23%, 30%);
+    padding: 0 1rem;
 }
 
 .weather-icon {
-  width: 3rem;
+    width: 3rem;
+}
+
+/* Daily data */
+.daily {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.daily>div {
+    background-color: hsl(243, 27%, 20%);
+    border-radius: 0.5rem;
+    border: 1px solid hsl(243, 23%, 30%);
+    padding: 1rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.daily-temp {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
 }
 
 button:hover {
-  cursor: pointer;
+    cursor: pointer;
 }
