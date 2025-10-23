@@ -1,24 +1,47 @@
 <script lang="ts">
     import { meteoData } from "./lib/api";
+    import { onMount } from "svelte";
 
-    let city = $state("");
+    let city = $state("Sofia");
     let weather = $state(null);
     let error = $state(null);
     let units = $state(["c", "kmh", "mm"]);
     let dropdownUnitsShow = $state(false);
-    let dropdownWeekdayShow = $state(false);
+    let weekdayShow = $state("1");
+    let hourlyData = $state([]);
+
+    function logDay() {
+        // For each filter we emply the array, so we don't add to existing data
+        hourlyData = []
+
+        weather.hourly.time.forEach((value, i) => {
+            if (value.getDay() == weekdayShow) {
+                hourlyData.push(
+                    [value.getHours(), weather.hourly.temperature[i], weather.hourly.weatherCode[i]]
+                )               
+            }
+        })
+        
+    }
 
     async function handleSearch() {
         if (city.trim()) {
             try {
                 weather = await meteoData(city);
+                logDay();
             } catch (err) {
                 error = err.message;
             }
         } else {
-            alert("Please enter a city name");
+            // else show error component
         }
     }
+
+    onMount(() => {
+        $effect(() => {
+            handleSearch();
+        });
+    });
 
     function toFarenheit(temp) {
         return (temp * 9) / 5 + 32;
@@ -37,17 +60,7 @@
             }
             return toFarenheit(weather.current.temperature).toFixed(0);
         }
-
-        if (units[0] == "c") {
-            if (type == "feelsLike") {
-                return 18;
-            }
-            return 20;
-        }
-        if (type == "feelsLike") {
-            return 64;
-        }
-        return 68;
+        // else show error component
     }
 
     function showWind(weather, units) {
@@ -56,7 +69,6 @@
                 ? weather.current.windSpeed.toFixed(0)
                 : (weather.current.windSpeed * 0.621371).toFixed(0);
         }
-        return units[1] == "kmh" ? 14 : 9;
     }
 
     function showPrecipitation(weather, units) {
@@ -65,7 +77,6 @@
                 ? weather.current.precipitation.toFixed(2)
                 : (weather.current.precipitation / 25.4).toFixed(2);
         }
-        return units[2] == "mm" ? 0 : 0;
     }
 
     function weatherCond(code) {
@@ -215,28 +226,39 @@
         <section class="hourly">
             <div class="hourly-header">
                 <p>Hourly forecast</p>
-                <div class="weekday-btn">
-                    <div>
-                        <button
-                        class="weekday-select-btn"
-                            onclick={() =>
-                                (dropdownWeekdayShow = !dropdownWeekdayShow)}
-                        >Tuesday</button>
-                        <img src="icon-dropdown.svg" alt="" />
-                    </div>
-
-                    {#if dropdownWeekdayShow}
-                        <div class="dropdown-weekday">
-                            <button>Monday</button>
-                            <button>Tuesday</button>
-                            <button>Wednesday</button>
-                            <button>Thursday</button>
-                            <button>Friday</button>
-                            <button>Saturday</button>
-                            <button>Sunday</button>
+                <select
+                    onchange={(e) => {
+                        const select = e.target as HTMLSelectElement;
+                        weekdayShow = select.value;
+                        logDay();
+                    }}
+                    name="dropdown-weekday"
+                    bind:value={weekdayShow}
+                    id="dropdown-weekday"
+                    class="dropdown-weekday"
+                >
+                    <option value="1">Monday</option>
+                    <option value="2">Tuesday</option>
+                    <option value="3">Wednesday</option>
+                    <option value="4">Thursday</option>
+                    <option value="5">Friday</option>
+                    <option value="6">Saturday</option>
+                    <option value="7">Sunday</option>
+                </select>
+            </div>
+            <div class="hourly-data">
+                {#if (hourlyData.length > 0) }
+                    {#each hourlyData as data}
+                        <div>
+                            <div>
+                                <img src={weatherCond(data[2])} class="weather-icon" alt="weather-icon" />
+                                <div>{(data[0] > 12) ? data[0] - 12 : data[0]} {(data[0] > 12) ? "PM" : "AM"}</div>
+                            </div>
+                            <div>{data[1].toFixed(0)}º</div>
                         </div>
-                    {/if}
-                </div>
+                    {/each}
+                {/if}
+
             </div>
         </section>
     </section>

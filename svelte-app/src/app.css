@@ -12,7 +12,9 @@ img {
   display: block;
 }
 
-p, input, button {
+p,
+input,
+button {
   outline: none;
   border: none;
   padding: 0;
@@ -37,13 +39,14 @@ h1 {
 
 
 
-header, main {
+header,
+main {
   min-width: 76rem;
   margin: 3rem auto;
   display: flex;
 }
 
-header {  
+header {
   flex-direction: row;
   justify-content: space-between;
 }
@@ -75,7 +78,7 @@ main {
   flex-direction: column;
   background-color: hsl(243, 27%, 20%);
   padding: 0.5rem;
-  border-radius: 0.5rem;  
+  border-radius: 0.5rem;
 }
 
 .weekday-btn {
@@ -90,29 +93,27 @@ main {
 }
 
 .weekday-select-btn {
-  background: hsl(243, 23%, 24%) ;
+  background: hsl(243, 23%, 24%);
   gap: 1rem;
 }
 
-.weekday-btn > div{
+.weekday-btn>div {
   display: flex;
 }
 
-.weekday-btn > div:first-child{
+.weekday-btn>div:first-child {
   gap: 1rem;
 }
 
 .dropdown-weekday {
   display: flex;
   flex-direction: column;
-  position: absolute;
-  top: 4rem;
-  right: 0;
   background-color: hsl(243, 27%, 20%);
   padding: 1rem;
   border-radius: 0.5rem;
   border: 1px solid hsl(243, 23%, 30%);
   width: 10rem;
+  color: inherit;
 }
 
 .dropdown-units hr {
@@ -122,7 +123,7 @@ main {
   height: 1px;
 }
 
-.dropdown-units button, .dropdown-weekday > button {
+.dropdown-units button {
   background-color: inherit;
   text-align: left;
   padding: 0.5rem;
@@ -152,15 +153,15 @@ main {
   margin: 0 auto;
 }
 
-.search-bar > input {
-  background:  url('icon-search.svg') no-repeat 1rem, center, hsl(243, 27%, 20%);
+.search-bar>input {
+  background: url('icon-search.svg') no-repeat 1rem, center, hsl(243, 27%, 20%);
   border-radius: 0.75rem;
   padding: 1rem 1rem 1rem 3rem;
   width: 100%;
   font-size: 1.2rem;
 }
 
-.search-bar > button {
+.search-bar>button {
   padding: 1rem 1.5rem;
   background-color: hsl(233, 67%, 56%);
   border-radius: 0.75rem;
@@ -189,27 +190,21 @@ main {
   flex-direction: column;
 }
 
-.current-header, .hourly-header {
+.current-header,
+.hourly-header {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
   border-radius: 1rem;
-} 
+}
 
 .current-header {
   padding: 5.25rem 1.5rem;
   background: url('bg-today-large.svg') no-repeat center;
 }
 
-.hourly {
-  width: 30%;
-}
 
-.hourly-header {
-  background-color: hsl(243, 27%, 20%);
-  padding: 1rem;
-}
 
 .temperature {
   font-size: 6rem;
@@ -220,6 +215,7 @@ main {
   justify-content: flex-end;
   gap: 2rem;
 }
+
 .temperature img {
   width: 25%;
 }
@@ -227,12 +223,12 @@ main {
 .current-more-info {
   display: flex;
   flex-direction: row;
-  justify-content: space-between ;
+  justify-content: space-between;
   gap: 1.5rem;
   margin: 1.75rem 0 3rem;
 }
 
-.current-more-info > div {
+.current-more-info>div {
   background-color: hsl(243, 27%, 20%);
   border-radius: 1rem;
   border: 1px solid hsl(243, 23%, 30%);
@@ -242,12 +238,50 @@ main {
   flex-direction: column;
 }
 
-.current-more-info > div > p:nth-child(2) {
+.current-more-info>div>p:nth-child(2) {
   font-size: 2rem;
   margin-top: 1.5rem;
+}
+
+/* Hourly data */
+.hourly {
+  width: 30%;
+  background-color: hsl(243, 27%, 20%);
+  border-radius: 1rem;
+}
+
+.hourly-header {
+  padding: 1rem;
+}
+
+.hourly-data,
+.hourly-data div {
+  display: flex;
+}
+
+.hourly-data {
+  flex-direction: column;
+  padding: 1.5rem;
+  gap: 1rem;
+}
+
+.hourly-data div {
+  flex-direction: row;
+  align-items: center;
+  gap: 1rem;
+}
+
+.hourly-data>div {
+  justify-content: space-between;
+  border-radius: 0.5rem;
+  border: 1px solid hsl(243, 23%, 30%);
+  padding: 0 1rem;
+}
+
+.weather-icon {
+  width: 3rem;
 }
 
 button:hover {
   cursor: pointer;
 }
-
