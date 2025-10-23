@@ -5,6 +5,8 @@
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    display: flex;
+    flex-direction: column;
 }
 
 /* Reset */
@@ -181,8 +183,6 @@ main {
     display: flex;
     flex-direction: column;
     width: 66%;
-    position: relative;
-    left: 1rem;
 }
 
 .current {
@@ -271,6 +271,7 @@ main {
     background: none;
     width: 0.25rem;
 }
+
 .hourly-data::-webkit-scrollbar-thumb {
     background: hsl(243, 23%, 30%);
 }
@@ -320,4 +321,65 @@ main {
 
 button:hover {
     cursor: pointer;
+}
+
+@media screen and (max-width:1200px) {
+    .container {
+        flex-direction: column;
+    }
+
+    .left-container,
+    .hourly {
+        width: 100%;
+    }
+
+    header,
+    main {
+        min-width: unset;
+
+    }
+
+    .search-bar {
+        width: 100%;
+        gap: 0
+    }
+    .search-bar input {
+        margin-right: 1rem;
+    }
+
+}
+
+@media screen and (max-width:700px) {
+    #app {
+        width: 100%;
+    }
+    main {
+        margin: 2rem;
+    }
+
+    .current-more-info {
+        display: grid;
+        grid-template: repeat(2, 1fr) / repeat(2, 1fr);
+    }
+
+    .current-more-info div:nth-child(1) {
+        grid-area: 1 / 1 ;
+    }
+    .current-more-info div:nth-child(2) {
+        grid-area: 1 / 2 ;
+    }
+    .current-more-info div:nth-child(3) {
+        grid-area: 2 / 1 ;
+    }
+    .current-more-info div:nth-child(4) {
+        grid-area: 2 / 2 ;
+    }
+
+    .current-more-info>div {
+        width: unset;
+    }
+
+    .daily {
+        flex-wrap: wrap;
+    }
 }

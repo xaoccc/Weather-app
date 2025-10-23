@@ -7,7 +7,8 @@
     let error = $state(null);
     let units = $state(["c", "kmh", "mm"]);
     let dropdownUnitsShow = $state(false);
-    let weekdayShow = $state("1");
+    const currentWeekDay = new Date
+    let weekdayShow = $state((currentWeekDay.getDay()).toString());
     let hourlyData = $state([]);
     let dailyData = $state([]);
 
@@ -16,6 +17,7 @@
         hourlyData = [];
 
         weather.hourly.time.forEach((value, i) => {
+            
             if (value.getDay() == weekdayShow) {
                 hourlyData.push([
                     value.getHours(),
@@ -97,6 +99,7 @@
     }
 
     function weatherCond(code) {
+        console.log(code)
         switch (true) {
             case [0].includes(code):
                 return "icon-sunny.webp";
@@ -104,14 +107,18 @@
                 return "icon-partly-cloudy.webp";
             case [10, 11, 12].includes(code):
                 return "icon-fog.webp";
-            case [21, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69].includes(code):
+            case [40, 41, 42, 43, 44, 45, 46, 47, 48, 49].includes(code):
+                return "icon-fog.webp";
+            case [21, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 78, 80, 81, 82].includes(code):
                 return "icon-rain.webp";
+            case [90, 91, 99].includes(code):
+                return "icon-storm.webp";
             case [50, 51, 52, 53, 54, 55, 56, 57, 58, 59].includes(code):
                 return "icon-drizzle.webp";
             case [22].includes(code):
                 return "icon-snow.webp";
             default:
-                return "icon-sunny.webp";
+                return "icon-loading.svg";
         }
     }
 </script>
@@ -278,7 +285,7 @@
                     <option value="4">Thursday</option>
                     <option value="5">Friday</option>
                     <option value="6">Saturday</option>
-                    <option value="7">Sunday</option>
+                    <option value="0">Sunday</option>
                 </select>
             </div>
             <div class="hourly-data">
