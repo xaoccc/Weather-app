@@ -113,7 +113,7 @@ main {
     appearance:none;
     display: flex;
     flex-direction: column;
-    background: url('icon-dropdown.svg') no-repeat center right 1rem, hsl(243, 27%, 20%);
+    background: url('https://vremeto.netlify.app/icon-dropdown.svg') no-repeat center right 1rem, hsl(243, 27%, 20%);
     padding: 1rem;
     border-radius: 0.5rem;
     border: 1px solid hsl(243, 23%, 30%);
@@ -169,7 +169,7 @@ main {
 }
 
 .search-bar::before {
-    background: url('icon-search.svg') no-repeat;
+    background: url('https://vremeto.netlify.app/icon-search.svg') no-repeat;
     content: '';
     display: block;
     height: 2rem;
