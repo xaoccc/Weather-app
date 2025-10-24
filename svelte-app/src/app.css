@@ -153,15 +153,34 @@ main {
     gap: 1rem;
     width: 55%;
     margin: 0 auto;
+    position: relative;
+    padding: 1rem 0;
 }
 
 .search-bar>input {
-    background: url('icon-search.svg') no-repeat 1rem, center, hsl(243, 27%, 20%);
+    background: hsl(243, 27%, 20%);
     border-radius: 0.75rem;
-    padding: 1rem 1rem 1rem 3rem;
+    padding-left: 3rem;
     width: 100%;
     font-size: 1.2rem;
 }
+
+.search-bar::before {
+    background: url('icon-search.svg') no-repeat;
+    content: '';
+    display: block;
+    height: 2rem;
+    width: 2rem;
+    position: absolute;
+    top: 2rem;
+    left: 2rem;
+}
+
+input:-webkit-autofill,
+  input:-webkit-autofill:focus {
+    transition: background-color 0s 600000s, color 0s 600000s !important;
+    
+  }
 
 .search-bar>button {
     padding: 1rem 1.5rem;
@@ -319,7 +338,7 @@ main {
     width: 100%;
 }
 
-button:hover {
+button:hover, input:hover {
     cursor: pointer;
 }
 
@@ -346,6 +365,10 @@ button:hover {
     .search-bar input {
         margin-right: 1rem;
     }
+
+    .search-bar::before {
+    left: 1rem;
+}
 
 }
 
