@@ -108,13 +108,16 @@ main {
 }
 
 .dropdown-weekday {
+    -moz-appearance:none;
+    -webkit-appearance:none;
+    appearance:none;
     display: flex;
     flex-direction: column;
-    background-color: hsl(243, 27%, 20%);
+    background: url('icon-dropdown.svg') no-repeat center right 1rem, hsl(243, 27%, 20%);
     padding: 1rem;
     border-radius: 0.5rem;
     border: 1px solid hsl(243, 23%, 30%);
-    width: 10rem;
+    width: 8rem;
     color: inherit;
 }
 
