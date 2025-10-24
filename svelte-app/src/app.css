@@ -140,11 +140,11 @@ main {
 }
 
 .selected {
-    background: hsl(243, 23%, 24%) url('icon-checkmark.svg') no-repeat right 0.5rem center !important;
+    background: hsl(243, 23%, 24%) url('https://vremeto.netlify.app/icon-checkmark.svg') no-repeat right 0.5rem center !important;
 }
 
 .dropdown-btn {
-    background: url('icon-dropdown.svg') no-repeat center;
+    background: url('https://vremeto.netlify.app/icon-dropdown.svg') no-repeat center;
     width: 13px;
     height: 8px;
 }
@@ -223,7 +223,7 @@ input:-webkit-autofill,
 
 .current-header {
     padding: 5.25rem 1.5rem;
-    background: url('https://raw.githubusercontent.com/xaoccc/Weather-app/refs/heads/main/svelte-app/public/bg-today-large.svg') no-repeat center;
+    background: url('/bg-today-large.svg') no-repeat center;
 }
 
 
