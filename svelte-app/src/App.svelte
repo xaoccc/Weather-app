@@ -1,10 +1,11 @@
 <script lang="ts">
     import { meteoData } from "./lib/api";
     import { onMount } from "svelte";
+    import ApiError from "./lib/ApiError.svelte";
 
     let city = $state("Sofia");
     let weather = $state(null);
-    let error = $state(null);
+    let error = $state(false);
     let units = $state(["c", "kmh", "mm"]);
     let dropdownUnitsShow = $state(false);
     const currentWeekDay = new Date
@@ -49,10 +50,10 @@
                 logDay();
                 logWeek();
             } catch (err) {
-                error = err.message;
+                error = true;
             }
         } else {
-            // else show error component
+            error = true;
         }
     }
 
@@ -79,7 +80,6 @@
             }
             return toFarenheit(weather.current.temperature).toFixed(0);
         }
-        // else show error component
     }
 
     function showWind(weather, units) {
@@ -99,15 +99,14 @@
     }
 
     function weatherCond(code) {
-        console.log(code)
         switch (true) {
             case [0].includes(code):
                 return "icon-sunny.webp";
-            case [1, 2, 3].includes(code):
+            case [1, 2].includes(code):
                 return "icon-partly-cloudy.webp";
-            case [10, 11, 12].includes(code):
-                return "icon-fog.webp";
-            case [40, 41, 42, 43, 44, 45, 46, 47, 48, 49].includes(code):
+            case [3,4,5,6,7,8,9].includes(code):
+                return "icon-overcast.webp";
+            case [10, 11, 12, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49].includes(code):
                 return "icon-fog.webp";
             case [21, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 78, 80, 81, 82].includes(code):
                 return "icon-rain.webp";
@@ -180,6 +179,10 @@
     </div>
 </header>
 
+{#if error}
+    <ApiError />
+
+{:else}
 <main>
     <h1>How's the sky looking today?</h1>
     <div class="search-bar">
@@ -257,8 +260,8 @@
                                 alt="weather-icon"
                             />
                             <div class="daily-temp">
-                                <p>{data[2].toFixed(0)}º</p>
-                                <p>{data[3].toFixed(0)}º</p>
+                                <p>{(units[0] == "c") ? data[2].toFixed(0) : toFarenheit(data[2]).toFixed(0)}º</p>
+                                <p>{(units[0] == "c") ? data[3].toFixed(0) : toFarenheit(data[3]).toFixed(0)}º</p>
                             </div>
                         </div>
                     {/each}
@@ -303,7 +306,7 @@
                                     {data[0] > 12 ? "PM" : "AM"}
                                 </div>
                             </div>
-                            <div>{data[1].toFixed(0)}º</div>
+                            <div>{(units[0] == "c") ? data[1].toFixed(0) : toFarenheit(data[1]).toFixed(0)}º</div>
                         </div>
                     {/each}
                 {/if}
@@ -311,3 +314,4 @@
         </section>
     </section>
 </main>
+{/if}
