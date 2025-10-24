@@ -220,7 +220,7 @@ input:-webkit-autofill,
 
 .current-header {
     padding: 5.25rem 1.5rem;
-    background: url('bg-today-large.svg') no-repeat center;
+    background: url('https://raw.githubusercontent.com/xaoccc/Weather-app/refs/heads/main/svelte-app/public/bg-today-large.svg') no-repeat center;
 }
 
 
