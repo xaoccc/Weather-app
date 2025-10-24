@@ -57,10 +57,12 @@ main {
     flex-direction: column;
 }
 
+/* Dropdown Units */
 .units {
     display: flex;
     flex-direction: column;
     align-items: flex-end;
+    position: relative;
 }
 
 .units-btn {
@@ -74,13 +76,15 @@ main {
 }
 
 .dropdown-units {
-    position: fixed;
-    top: 5.5rem;
+    position: absolute;
+    top: 2.5rem;
     display: flex;
     flex-direction: column;
-    background-color: hsl(243, 27%, 20%);
-    padding: 0.5rem;
-    border-radius: 0.5rem;
+    background-color: #272541;
+    padding: .5rem;
+    border-radius: .5rem;
+    width: 10rem;
+    z-index: 100;
 }
 
 .weekday-btn {
@@ -107,18 +111,8 @@ main {
     gap: 1rem;
 }
 
-.dropdown-weekday {
-    -moz-appearance:none;
-    -webkit-appearance:none;
-    appearance:none;
-    display: flex;
-    flex-direction: column;
-    background: url('https://vremeto.netlify.app/icon-dropdown.svg') no-repeat center right 1rem, hsl(243, 27%, 20%);
-    padding: 1rem;
-    border-radius: 0.5rem;
-    border: 1px solid hsl(243, 23%, 30%);
-    width: 8rem;
-    color: inherit;
+.selected {
+    background: hsl(243, 23%, 24%) url('/icon-checkmark.svg') no-repeat right 0.5rem center !important;
 }
 
 .dropdown-units hr {
@@ -139,15 +133,27 @@ main {
     color: hsl(240, 6%, 70%);
 }
 
-.selected {
-    background: hsl(243, 23%, 24%) url('https://vremeto.netlify.app/icon-checkmark.svg') no-repeat right 0.5rem center !important;
+/* Dropdow Daily */
+.dropdown-weekday {
+    -moz-appearance:none;
+    -webkit-appearance:none;
+    appearance:none;
+    display: flex;
+    flex-direction: column;
+    background: url('/icon-dropdown.svg') no-repeat center right 1rem, hsl(243, 27%, 20%);
+    padding: 1rem;
+    border-radius: 0.5rem;
+    border: 1px solid hsl(243, 23%, 30%);
+    width: 8rem;
+    color: inherit;
 }
 
 .dropdown-btn {
-    background: url('https://vremeto.netlify.app/icon-dropdown.svg') no-repeat center;
+    background: url('/icon-dropdown.svg') no-repeat center;
     width: 13px;
     height: 8px;
 }
+
 
 /* Search bar */
 .search-bar {
@@ -169,7 +175,7 @@ main {
 }
 
 .search-bar::before {
-    background: url('https://vremeto.netlify.app/icon-search.svg') no-repeat;
+    background: url('/icon-search.svg') no-repeat;
     content: '';
     display: block;
     height: 2rem;
@@ -356,7 +362,7 @@ button:hover, input:hover {
 }
 
 .apierror-container button {
-    background:url('icon-retry.svg') no-repeat center left 1rem, hsl(243, 27%, 20%);
+    background:url('/icon-retry.svg') no-repeat center left 1rem, hsl(243, 27%, 20%);
     border-radius: 1rem;
     border: 1px solid hsl(243, 23%, 30%);
     padding: 1.25rem 1.25rem 1.25rem 3rem;
