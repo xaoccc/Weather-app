@@ -12,6 +12,7 @@
     let weekdayShow = $state(currentWeekDay.getDay().toString());
     let hourlyData = $state([]);
     let dailyData = $state([]);
+    let daysMenu = $state(false);
 
     function logDay() {
         // For each filter we emply the array, so we don't add to existing data
@@ -42,6 +43,7 @@
         });
     }
 
+    // The search bar finds a city even if the search bar is empty, BUT if it does not find any data, this means API error and only then it will show it
     async function handleSearch() {
         if (city.trim()) {
             try {
@@ -49,18 +51,24 @@
                 logDay();
                 logWeek();
             } catch (err) {
-                error = true;
+                if (!weather) {
+                    error = true;
+                }
             }
         } else {
-            error = true;
+            if (!weather) {
+                error = true;
+            }
         }
     }
 
-    onMount(() => {
-        $effect(() => {
+    // The onMont wrapper makes the search button useless, BUT if the city name is difficult to type, the reactive behaviour is preferred.
+
+    // onMount(() => {
+    //     $effect(() => {
             handleSearch();
-        });
-    });
+    //     });
+    // });
 
     function toFarenheit(temp) {
         return (temp * 9) / 5 + 32;
@@ -123,6 +131,14 @@
             default:
                 return "icon-loading.svg";
         }
+    }
+
+    function selectDay(e) {
+        e.target.parentElement.parentElement.previousSibling.previousSibling.textContent =
+            e.target.textContent;
+        weekdayShow = e.target.value;
+        logDay();
+        daysMenu = false;
     }
 </script>
 
@@ -286,26 +302,64 @@
             <section class="hourly">
                 <div class="hourly-header">
                     <p>Hourly forecast</p>
-                    <!-- TO DO: make the dropdown customizable, using div + ul + li -->
-                    <select
-                        onchange={(e) => {
-                            const select = e.target as HTMLSelectElement;
-                            weekdayShow = select.value;
-                            logDay();
-                        }}
-                        name="dropdown-weekday"
-                        bind:value={weekdayShow}
-                        id="dropdown-weekday"
-                        class="dropdown-weekday"
-                    >
-                        <option value="1">Monday</option>
-                        <option value="2">Tuesday</option>
-                        <option value="3">Wednesday</option>
-                        <option value="4">Thursday</option>
-                        <option value="5">Friday</option>
-                        <option value="6">Saturday</option>
-                        <option value="0">Sunday</option>
-                    </select>
+                    <!-- For more control and flexibitily I use ul, li and buttons instead of select and options -->
+                    <div class="select">
+                        <button
+                            class="select-weekday"
+                            value={weekdayShow}
+                            onclick={() => {
+                                daysMenu
+                                    ? (daysMenu = false)
+                                    : (daysMenu = true);
+                            }}>Monday</button
+                        >
+                        {#if daysMenu == true}
+                            <ul class="dropdown-weekday">
+                                <li>
+                                    <button
+                                        onclick={(e) => selectDay(e)}
+                                        value="0">Monday</button
+                                    >
+                                </li>
+                                <li>
+                                    <button
+                                        onclick={(e) => selectDay(e)}
+                                        value="1">Tuesday</button
+                                    >
+                                </li>
+                                <li>
+                                    <button
+                                        onclick={(e) => selectDay(e)}
+                                        value="2">Wednesday</button
+                                    >
+                                </li>
+                                <li>
+                                    <button
+                                        onclick={(e) => selectDay(e)}
+                                        value="3">Thursday</button
+                                    >
+                                </li>
+                                <li>
+                                    <button
+                                        onclick={(e) => selectDay(e)}
+                                        value="4">Friday</button
+                                    >
+                                </li>
+                                <li>
+                                    <button
+                                        onclick={(e) => selectDay(e)}
+                                        value="5">Saturday</button
+                                    >
+                                </li>
+                                <li>
+                                    <button
+                                        onclick={(e) => selectDay(e)}
+                                        value="6">Sunday</button
+                                    >
+                                </li>
+                            </ul>
+                        {/if}
+                    </div>
                 </div>
                 <div class="hourly-data">
                     {#if hourlyData.length > 0}
