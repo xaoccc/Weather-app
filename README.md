@@ -54,6 +54,7 @@ Users should be able to:
 - [Svelte](https://svelte.dev/)
 - [Open Meteo](https://open-meteo.com/en/docs)
 - [chatGPT](https://chatgpt.com/)
+- [Netlify](https://www.netlify.com/)
 
 ### Challenges
 
