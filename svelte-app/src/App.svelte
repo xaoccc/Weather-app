@@ -107,7 +107,6 @@
         >
             <img src="icon-units.svg" alt="settings icon" />
             <p>Units</p>
-            <div class="dropdown-btn"></div>
         </button>
         {#if dropdownUnitsShow}
             <div class="dropdown-units">
@@ -171,11 +170,11 @@
                 <div class="current">
                     <div class="current-header">
                         <div class="current-location">
-                            <p class="location">
+                            <h2>
                                 {weather
                                     ? `${weather.name}, ${weather.country}`
                                     : "Berlin, Germany"}
-                            </p>
+                            </h2>
                             <p class="date">
                                 {new Date().toLocaleDateString([], {
                                     weekday: "long",
@@ -268,7 +267,6 @@
                         {#if daysMenu == true}
                             <ul class="dropdown-weekday">
                                 {#each weekDays as day, i}
-                                    {console.log(day, i)}
                                     <li>
                                         <button
                                             onclick={(e) => selectDay(e)}

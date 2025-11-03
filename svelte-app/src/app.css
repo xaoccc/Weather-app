@@ -42,9 +42,11 @@ body {
 
 h1 {
     font-family: 'Bricolage Grotesque';
-    font-size: 3.2em;
+    font-size: 3.4em;
     line-height: 1.1;
     text-align: center;
+    margin: 1rem 0 3rem;
+    color: #fff;
 }
 
 
@@ -78,9 +80,10 @@ main {
     flex-direction: row;
     align-items: center;
     gap: 0.5rem;
-    background-color: hsl(243, 27%, 20%);
-    padding: 0.5rem 0.75rem;
-    border-radius: 0.75rem;
+    background: url('/icon-dropdown.svg') no-repeat center right 1rem, hsl(243, 23%, 24%);
+    padding: 0.75rem 2.5rem 0.75rem 1rem;
+    border-radius: 0.5rem;
+    font-size: 1rem;
 }
 
 .dropdown-units {
@@ -180,11 +183,6 @@ main {
     position: relative;
 }
 
-
-
-
-
-
 /* Search bar */
 .search-bar {
     display: flex;
@@ -225,15 +223,16 @@ input:-webkit-autofill,
     padding: 1rem 1.5rem;
     background-color: hsl(233, 67%, 56%);
     border-radius: 0.75rem;
-    font-size: 1.2rem;
+    font-size: 1.3rem;
     text-align: center;
+    font-family: inherit;
 }
 
 /* Weather data containers */
 .container {
     display: flex;
     flex-direction: row;
-    gap: 3rem;
+    gap: 2rem;
     margin-top: 3rem;
 }
 
@@ -262,7 +261,11 @@ input:-webkit-autofill,
     background: url('/bg-today-large.svg') no-repeat center;
 }
 
-
+h2 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin: 0 0 0.5rem;
+}
 
 .temperature {
     font-size: 6rem;
@@ -303,7 +306,7 @@ input:-webkit-autofill,
 
 /* Hourly data */
 .hourly {
-    width: 30%;
+    width: 32%;
     background-color: hsl(243, 27%, 20%);
     border-radius: 1rem;
 }
