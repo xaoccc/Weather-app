@@ -21,13 +21,13 @@
     let dailyData = $state([]);
     let daysMenu = $state(false);
     const weekDays = [
+        "Sunday",
         "Monday",
         "Tuesday",
         "Wednesday",
         "Thursday",
         "Friday",
-        "Saturday",
-        "Sunday",
+        "Saturday",        
     ];
 
     function logDay() {
